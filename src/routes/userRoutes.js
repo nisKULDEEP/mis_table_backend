@@ -11,7 +11,7 @@ const {
 } = require('../controllers/auth.controller');
 
 app.post('/signup', userSignup);
-app.get('/login', userSignin);
-app.get('/signout', userSignout);
+app.post('/login', userSignin);
+app.get('/logout', userSignout);
 
 module.exports = app;

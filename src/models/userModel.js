@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   mobile: {
     type: Number,
   },
-  role: { type: String, required: false, default: 'customer' },
+  role: { type: String, required: false, default: 'CUSTOMER' },
   password: {
     type: String,
     require: [true, 'password is required'],

@@ -5,8 +5,8 @@ const userModel = require('../models/userModel');
 async function isValidToken(req, res, next) {
   try {
     let { token } = req.headers;
-    token = token?.split(' ')?.[1];
-    if (token) {
+    token = token?.trim().replace(`"`, "").split(' ')?.[1]?.replace(`"`, "");;
+    if (token && token !== 'undefined') {
       JWTService.verifyToken(token);
       //verification token in db
       const result = await tokenModel.findOne({ token });
@@ -33,7 +33,8 @@ async function isValidToken(req, res, next) {
 async function isAdmin(req, res, next) {
   try {
     let { token } = req.headers;
-    token = token.split(' ')[1];
+    token = token?.trim().replace(`"`, "").split(' ')?.[1]?.replace(`"`, "");;
+    if(token === 'undefined' ) throw new Error('token is undefined');
     const response = await JWTService.verifyToken(token);
     const result = await tokenModel.findOne({ token });
 
